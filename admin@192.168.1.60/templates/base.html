@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MokTech Bakery{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="/" class="nav-brand">MokTech Bakery</a>
+            <ul class="nav-links">
+                <li><a href="/">Home</a></li>
+                <li><a href="/menu">Menu</a></li>
+                <li><a href="/order">Order</a></li>
+                <li><a href="/admin/orders">Admin</a></li>
+            </ul>
+            <div class="cart-icon" onclick="window.location='/order'">
+                Cart (<span id="cart-count">0</span>)
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>&copy; 2026 MokTech Bakery &mdash; Fresh every day.</p>
+    </footer>
+
+    <script src="/static/js/cart.js"></script>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

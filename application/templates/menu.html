@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}Menu - MokTech Bakery{% endblock %}
+
+{% block content %}
+<div class="page-header">
+    <h1>Our Menu</h1>
+    <p>Fresh baked goods available today</p>
+</div>
+
+<div class="product-grid">
+    {% for product in products %}
+    <div class="product-card">
+        {% if product.image_url %}
+        <img src="{{ product.image_url }}" alt="{{ product.name }}" class="product-image">
+        {% else %}
+        <div class="product-image-placeholder"></div>
+        {% endif %}
+        <div class="product-info">
+            <span class="product-category">{{ product.category or "Baked Good" }}</span>
+            <h3 class="product-name">{{ product.name }}</h3>
+            <p class="product-description">{{ product.description or "" }}</p>
+            <div class="product-footer">
+                <span class="product-price">${{ "%.2f"|format(product.price) }}</span>
+                <button
+                    class="btn btn-add"
+                    onclick="addToCart({{ product.id }}, '{{ product.name | replace("'", "\\'") }}', {{ product.price }})"
+                >
+                    Add to Cart
+                </button>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <p class="empty-message">No products available right now. Check back soon!</p>
+    {% endfor %}
+</div>
+
+{% if products %}
+<div class="cart-bar" id="cart-bar">
+    <span id="cart-summary">0 items in cart</span>
+    <a href="/order" class="btn btn-primary">View Order</a>
+</div>
+{% endif %}
+{% endblock %}
+
+{% block scripts %}
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    const cart = getCart();
+    const count = cart.reduce((s, i) => s + i.quantity, 0);
+    const bar = document.getElementById('cart-bar');
+    const summary = document.getElementById('cart-summary');
+    if (bar && count > 0) {
+        bar.classList.add('visible');
+        summary.textContent = count + ' item' + (count !== 1 ? 's' : '') + ' in cart';
+    }
+});
+</script>
+{% endblock %}

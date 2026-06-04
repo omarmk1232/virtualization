@@ -44,3 +44,17 @@ The NFS server's firewall was blocking traffic from the ESXi hosts. Had to open 
 ### NFS Version — Must Use NFSv4 on ESXi 8
 
 ESXi 8 has known issues mounting NFSv3 shares — the datastore would not mount or would drop connectivity. Switching to **NFSv4** resolved the issue. When adding the NFS datastore in vCenter, ensure NFS version is set to **4** not 3.
+
+### NFS Datastore Gets Stuck
+
+If the NFS datastore becomes unresponsive or stuck on a host, disconnect and reconnect it via the ESXi CLI:
+
+```bash
+# Remove the stuck datastore
+esxcfg-nas -d Main-Nfs-DataStore
+
+# Re-add it
+esxcli storage nfs41 add -H main-nfs.home.local -s /moktech-lab -v Main-Nfs-DataStore
+```
+
+Run on each affected host via SSH.

@@ -33,7 +33,7 @@ Host 1 is almost fully utilized running vCenter Server. Adding it to the cluster
 | Feature | Status |
 |---|---|
 | HA | Enabled — if one host fails, VMs restart on the other |
-| DRS | Enabled — balances VM load between Host 2 and Host 3 |
+| DRS | Enabled (Automatic mode) — automatically migrates VMs between Host 2 and Host 3 to balance load |
 | vMotion | Enabled — live migrate VMs between hosts |
 
 ---
@@ -44,6 +44,19 @@ Host 1 is almost fully utilized running vCenter Server. Adding it to the cluster
 2. Name the cluster and enable **HA** and **DRS**
 3. Add **Host 2** and **Host 3** to the cluster
 4. Once shared storage is attached, configure the shared datastore for the cluster
+
+---
+
+## vApp — Bakery
+
+The database VM and app VM are grouped under a single vApp in vCenter. The vApp manages startup order to ensure the database is fully up before the app starts:
+
+| Order | VM | Delay |
+|---|---|---|
+| 1 | Database VM | — |
+| 2 | App VM | starts after database |
+
+This ensures the bakery app does not attempt to connect to PostgreSQL before it is ready.
 
 ---
 

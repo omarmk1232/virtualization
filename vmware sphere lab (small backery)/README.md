@@ -40,6 +40,11 @@ Both VMs are grouped under a vApp with the database starting before the app.
 ![vCenter](images/vcenter.JPG)
 ![Network](images/network.JPG)
 ![NFS Storage](images/nfs.JPG)
+![Bakery App](images/app.JPG)
+![App Server Metrics](images/app-server-metrics.JPG)
+![Database Metrics](images/database-metrics.JPG)
+![Bakery Logs](images/bakery-logs.JPG)
+![System Logs](images/system-logs.JPG)
 
 ---
 

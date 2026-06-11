@@ -45,6 +45,8 @@ Both VMs are grouped under a vApp with the database starting before the app.
 ![Database Metrics](images/database-metrics.JPG)
 ![Bakery Logs](images/bakery-logs.JPG)
 ![System Logs](images/system-logs.JPG)
+![DNS Server](images/dns-server.JPG)
+![DNS Server Metrics](images/dns-server-metrics.JPG)
 
 ---
 
